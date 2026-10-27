@@ -1,7 +1,7 @@
 {
  "report": "xuannv_annual5m_report.tex",
- "report_version": "3.0",
- "verified_date": "2026-10-22",
+ "report_version": "3.1",
+ "verified_date": "2026-10-27",
  "scope": "Slimmed v3.0 report: research-phase evidence E14,E16-E64 removed from server and kept only in tag archive/annual-research-20261019; adds v3 training/evaluation (E65-E66) and v4 launch (E67).",
  "archived_evidence_tag": "archive/annual-research-20261019",
  "evidence": {
@@ -616,10 +616,6 @@
   "E66": {
    "files": [
     {
-     "path": "outputs/v3/eval/plan.json",
-     "sha256": "0320e379a27f45e483a104fa77e0b4e91692f89ce4e739b0e40d30fcfcbf0d61"
-    },
-    {
      "path": "outputs/v3/eval/run_arm.sh",
      "sha256": "2a1217ca0486a39f99cf5d6db3200f7e6519a9eaa07e6b52d3db3e5f54d8ed75"
     },
@@ -646,6 +642,26 @@
     {
      "path": "outputs/v3/eval/figures/v3_epoch_deltas.pdf",
      "sha256": "bbb13e8a34283f32ab4d1557171deedbf3991de21a4a0861df36c82bd27756bf"
+    },
+    {
+     "path": "outputs/v3/eval/results_v3.json",
+     "sha256": "3ad8c7b68bd072992d7736b72ea7c419c1df187c20db3c84fd5cebae99993674"
+    },
+    {
+     "path": "outputs/v3/eval/two_seed_results_v3.json",
+     "sha256": "4769ff0c643018a9e4eb19b75dd935b5613d9c9ecc59afc85e096dd623b13e56"
+    },
+    {
+     "path": "outputs/v3/eval/results_v4.json",
+     "sha256": "235c3e8dd03d3cecafeafb63d4574d59e247845b5c384174303d1c65e67a6361"
+    },
+    {
+     "path": "outputs/v3/eval/two_seed_results_v4.json",
+     "sha256": "69c6abf506e6e3f2eaa0cf06471fc41c7f2be604610366ac98c1b2718afc6e7b"
+    },
+    {
+     "path": "outputs/v3/eval/plan.json",
+     "sha256": "499667683023554b6b3afa0259524122d1cd549d7e902788edcb2fe8343dff66"
     }
    ],
    "note": "Same protocol as full-scope study; reference readouts reused from allowed_scope_study/science/evaluation/original_exact; reproduced S=64.944, native F=38.605. Pre-declared endpoint epoch 8."
@@ -659,9 +675,17 @@
     {
      "path": "outputs/v4/run_20261022_045453/git_sha.txt",
      "sha256": "b1ef81f27365ede70c294de3c3900325c8a4d91deacbbb7f828e5d0917171373"
+    },
+    {
+     "path": "outputs/v4/run_20261022_045453/train.log",
+     "sha256": "4b42cfd5d7153519c53ffe6eaeafd82be05f94443a7111ea3874ec632bcb35b2"
+    },
+    {
+     "path": "outputs/v4/run_20261022_045453/annual5m_100m_v4.pt",
+     "sha256": "a6d1d9ccbce58d05cba816411561d81d894a9466eca77d2603907ce8f79c0d4d"
     }
    ],
-   "note": "v4: original100M config plus annual_context_pooling and annual_exact_mask_coverage, from scratch, 632000 updates; launched 2026-10-22, in progress."
+   "note": "v4: original100M config plus context pooling and exact mask, from scratch, 632000 updates, 398008 s, 0 nonfinite. Not a candidate."
   }
  },
  "verified_metrics": {
@@ -952,8 +976,92 @@
     "patches": 203,
     "draws": 2000
    }
+  },
+  "v4_epoch200_vs_original100M": {
+   "semantic": {
+    "difference": -0.030361704115605237,
+    "CI95": [
+     -0.08709288573882494,
+     0.01670901723534139
+    ],
+    "groups": 124,
+    "patches": 124,
+    "draws": 2000
+   },
+   "landcover_mIoU": {
+    "difference": -0.015502908550440786,
+    "CI95": [
+     -0.042634502656468405,
+     0.016049528326057143
+    ],
+    "groups": 124,
+    "patches": 124,
+    "draws": 2000
+   },
+   "water10m_F1": {
+    "difference": -0.04522049968076969,
+    "CI95": [
+     -0.14821841118006468,
+     0.033223457778215844
+    ],
+    "groups": 124,
+    "patches": 124,
+    "draws": 2000
+   },
+   "fine_two_readout_seeds": {
+    "F": {
+     "difference": -0.01917571599109541,
+     "CI95": [
+      -0.032754987298163826,
+      -0.006225858747731943
+     ],
+     "groups": 16,
+     "patches": 203,
+     "draws": 2000
+    },
+    "building_F1": {
+     "difference": -0.018625723067952266,
+     "CI95": [
+      -0.044990213700234497,
+      0.013572229048630282
+     ],
+     "groups": 16,
+     "patches": 203,
+     "draws": 2000
+    },
+    "road_F1": {
+     "difference": -0.016328714701724006,
+     "CI95": [
+      -0.03903110233264062,
+      0.008219305052986767
+     ],
+     "groups": 16,
+     "patches": 203,
+     "draws": 2000
+    },
+    "water_F1": {
+     "difference": -0.027184110529396732,
+     "CI95": [
+      -0.07775666240670505,
+      0.02015905487721136
+     ],
+     "groups": 16,
+     "patches": 203,
+     "draws": 2000
+    },
+    "road_boundaryF1": {
+     "difference": -0.01456431566530858,
+     "CI95": [
+      -0.04258253809827624,
+      0.011016946599604605
+     ],
+     "groups": 16,
+     "patches": 203,
+     "draws": 2000
+    }
+   }
   }
  },
  "loader_samples_read": 600,
- "report_source_sha256": "83ff8b9957af1d0e041bb5f94e3f05f61d8be602b7f0da459234eb5ed4bb0712"
+ "report_source_sha256": "dbae8deae3db2f4b617d77d03e03e29013b0eb81150051980e82aab043b84cce"
 }
